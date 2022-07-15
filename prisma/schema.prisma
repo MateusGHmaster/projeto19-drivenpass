@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,61 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model users {
+  id             Int      @id @default(autoincrement())
+  email          String
+  password       String
+  cards          cards[]
+  credentials    credentials[]
+  notes          notes[]
+  wifi           wifi[]
+}
+
+model cards {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  title          String   @unique
+  number         String
+  name           String
+  securityCode   String
+  expirationDate String
+  password       String
+  isVirtual      Boolean  @default(false)
+  type           cardtype
+  users          users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model credentials {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  title          String   @unique
+  url            String
+  user           String
+  password       String
+  users          users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model notes {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  title          String   @unique
+  note           String
+  users          users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model wifi {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  title          String   @unique
+  name           String
+  password       String
+  users          users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+enum cardtype {
+  credit
+  debit
+  credit_debit  @map("credit-debit")
 }
