@@ -2,10 +2,10 @@ import { Request, Response } from 'express';
 import { CreateCredentialData, UserToken } from '../repositories/credentialRepository.js';
 import * as credentialService from '../services/credentialService.js';
 
-export async function createCredential( req: Request, res: Response) {
+export async function createCredential (req: Request, res: Response) {
 
     const credentialData: CreateCredentialData = req.body;
-    const user: UserToken = res.locals.user;
+    const user: UserToken= res.locals.user;
 
     await credentialService.createCredentialData(user, credentialData);
 
