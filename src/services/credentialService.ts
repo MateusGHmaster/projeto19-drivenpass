@@ -23,7 +23,7 @@ export async function createCredential(credentialData: CreateCredentialData) {
 
 }
 
-export async function deleteCredentialData (user: UserToken, credentialId) {
+export async function deleteCredentialData (user: UserToken, credentialId: number) {
 
     const credential = await credentialRepository.getCredentials_One(user, credentialId);
 
@@ -40,7 +40,7 @@ export async function deleteCredentialData (user: UserToken, credentialId) {
 
 }
 
-export async function getCredentialsData (user: UserToken, credentialId) {
+export async function getCredentialsData (user: UserToken, credentialId: number) {
 
     const credential = await credentialRepository.getCredentials_One(user, credentialId);
 

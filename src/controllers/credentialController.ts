@@ -14,7 +14,7 @@ export async function createCredentials (req: Request, res: Response) {
 
 export async function deleteCredentials (req: Request, res: Response) {
     
-    const credentialId = req.params.id;
+    const credentialId = +req.params.id;
     const { user } = res.locals;
 
     await credentialService.deleteCredentialData(user, credentialId);
@@ -25,7 +25,7 @@ export async function deleteCredentials (req: Request, res: Response) {
 
 export async function getCredentials (req: Request, res: Response) {
     
-    const credentialId = req.query.id;
+    const credentialId = +req.query.id;
     const { user } = res.locals;
 
     if (!credentialId) {

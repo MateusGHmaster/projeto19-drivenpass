@@ -1,5 +1,5 @@
-import { users } from '@prisma/client';
 import prisma from '../config/database.js';
+import { users } from '@prisma/client';
 
 export type CreateUserData = Omit<users, 'id'>;
 
