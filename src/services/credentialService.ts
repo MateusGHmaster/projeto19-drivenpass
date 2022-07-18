@@ -3,7 +3,7 @@ import { CreateCredentialData } from '../repositories/credentialRepository.js';
 import * as credentialRepository from '../repositories/credentialRepository.js';
 import { UserToken } from '../repositories/credentialRepository.js';
 
-export async function createCredential(credentialData: CreateCredentialData) {
+export async function createCredentialData (credentialData: CreateCredentialData) {
 
     const credentials = await credentialRepository.checkForTitle(credentialData.userId, credentialData.title);
 

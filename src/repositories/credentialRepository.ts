@@ -16,9 +16,9 @@ export async function insertCredentialData (credentialData: CreateCredentialData
 
 }
 
-export async function deleteCredentialData (user: UserToken, credentialId) {
+export async function deleteCredentialData (user: UserToken, credentialId: number) {
     
-    await prisma.credentials.deleteMany({ where: { userId: user.id, id: parseInt(credentialId) } });
+    await prisma.credentials.deleteMany({ where: { userId: user.id, id: credentialId } });
 
     return;
 
@@ -32,9 +32,9 @@ export async function checkForTitle (userId: number, credentialTitle: string) {
 
 }
 
-export async function getCredentials_One (user: UserToken, credentialId) {
+export async function getCredentials_One (user: UserToken, credentialId: number) {
     
-    const credential = await prisma.credentials.findFirst({ where: { userId: user.id, id: parseInt(credentialId) } });
+    const credential = await prisma.credentials.findFirst({ where: { userId: user.id, id: credentialId } });
 
     return credential;
 
