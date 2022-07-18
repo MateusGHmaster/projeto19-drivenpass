@@ -8,13 +8,13 @@ datasource db {
 }
 
 model users {
-  id             Int      @id @default(autoincrement())
-  email          String
-  password       String
-  cards          cards[]
-  credentials    credentials[]
-  notes          notes[]
-  wifi           wifi[]
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
+  password    String
+  cards       cards[]
+  credentials credentials[]
+  notes       notes[]
+  wifi        wifi[]
 }
 
 model cards {
@@ -29,33 +29,36 @@ model cards {
   isVirtual      Boolean  @default(false)
   type           cardtype
   users          users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  @@unique([userId, title])
 }
 
 model credentials {
-  id             Int      @id @default(autoincrement())
-  userId         Int
-  title          String
-  url            String
-  user           String
-  password       String
-  users          users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id       Int    @id @default(autoincrement())
+  userId   Int
+  title    String
+  url      String
+  user     String
+  password String
+  users    users  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  @@unique([userId, title])
 }
 
 model notes {
-  id             Int      @id @default(autoincrement())
-  userId         Int
-  title          String
-  note           String
-  users          users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id     Int    @id @default(autoincrement())
+  userId Int
+  title  String
+  note   String
+  users  users  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  @@unique([userId, title])
 }
 
 model wifi {
-  id             Int      @id @default(autoincrement())
-  userId         Int
-  title          String
-  name           String
-  password       String
-  users          users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id       Int    @id @default(autoincrement())
+  userId   Int
+  title    String
+  name     String
+  password String
+  users    users  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 enum cardtype {
